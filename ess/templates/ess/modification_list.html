@@ -1,0 +1,8 @@
+<h1>Modification</h1>
+<ul>
+{% for modification in object_list %}
+    <li>{{ modification }}</li>
+{% empty %}
+    <li>No Modification yet.</li>
+{% endfor %}
+</ul>

@@ -1,0 +1,8 @@
+<h1>Brands</h1>
+<ul>
+{% for brand in object_list %}
+    <li><a href="{% url 'chassis-list' brand %}">{{ brand }}</a></li>
+{% empty %}
+    <li>No Brands yet.</li>
+{% endfor %}
+</ul>

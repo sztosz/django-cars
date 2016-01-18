@@ -1,0 +1,8 @@
+<h1>Car Model</h1>
+<ul>
+{% for car_model in object_list %}
+    <li><a href="{% url 'ecu-list' car_model.chassis.brand car_model.chassis car_model  %}">{{ car_model }}</a></li>
+{% empty %}
+    <li>No Car Model yet.</li>
+{% endfor %}
+</ul>
