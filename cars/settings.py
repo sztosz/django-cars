@@ -90,8 +90,8 @@ DATABASES = {
 
 import dj_database_url
 
-DATABASES['default'] = dj_database_url.config()
-
+DATABASES['default'] = dj_database_url.config(default='postgres://cars:cars@localhost/cars')
+DATABASES['default']['CONN_MAX_AGE'] = 500
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -137,3 +137,4 @@ STATICFILES_DIRS = (
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
