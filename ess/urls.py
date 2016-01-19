@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from ess.views import BrandListView, ChassisListView, CarModelListView, ECUListView, ModificationListView, \
-    ModificationDetailView
+    ModificationDetailView, ModificationFileUploadView
 
 urlpatterns = [
     url('^$', BrandListView.as_view(), name='brand-list'),
@@ -14,5 +14,8 @@ urlpatterns = [
     url('^(?P<brand>\w+)/(?P<chassis>\w+)/(?P<car_model>[\w\.]+)/(?P<ecu>\w+)/(?P<modification>\w+)$',
         ModificationDetailView.as_view(),
         name='modification-detail'),
+    url('^(?P<brand>\w+)/(?P<chassis>\w+)/(?P<car_model>[\w\.]+)/(?P<ecu>\w+)/(?P<modification>\w+)/upload$',
+        ModificationFileUploadView.as_view(),
+        name='modification-upload'),
 
 ]
