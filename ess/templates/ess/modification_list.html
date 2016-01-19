@@ -1,7 +1,7 @@
 <h1>Modification</h1>
 <ul>
 {% for modification in object_list %}
-    <li>{{ modification }}</li>
+    <li><a href="{% url 'modification-detail' modification.ecu.car_model.chassis.brand modification.ecu.car_model.chassis modification.ecu.car_model modification.ecu modification%}">{{ modification }}</a></li>
 {% empty %}
     <li>No Modification yet.</li>
 {% endfor %}

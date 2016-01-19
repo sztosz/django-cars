@@ -35,8 +35,7 @@ class ECU(models.Model):
 class Modification(models.Model):
     ecu = models.ForeignKey(ECU)
     name = models.CharField(max_length=50)
-    before = models.CharField(max_length=50)
-    after = models.CharField(max_length=50)
+    script = models.TextField()
 
     def __str__(self):
         return self.name

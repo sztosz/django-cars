@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import Brand, Chassis, CarModel, ECU, Modification
 
@@ -43,4 +43,18 @@ class ModificationListView(ListView):
             ecu__car_model__chassis__name=self.kwargs['chassis']).filter(
             ecu__car_model__name=self.kwargs['car_model']).filter(
             ecu__name=self.kwargs['ecu']
+        )
+
+
+class ModificationDetailView(DetailView):
+    model = Modification
+
+    def get_object(self, queryset=None):
+        return Modification.objects.all().filter(
+            ecu__car_model__chassis__brand__name=self.kwargs['brand']).filter(
+            ecu__car_model__chassis__name=self.kwargs['chassis']).filter(
+            ecu__car_model__name=self.kwargs['car_model']).filter(
+            ecu__name=self.kwargs['ecu']).filter(
+            name=self.kwargs['modification']).first(
+
         )
