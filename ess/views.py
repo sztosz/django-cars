@@ -1,7 +1,7 @@
 from django.http import HttpResponse, FileResponse
 from django.views.generic import ListView, DetailView, View
 
-from .models import Brand, Chassis, CarModel, ECU, Modification
+from .models import Brand, Chassis, Engine, ECU, Modification
 from .forms import UploadForm
 
 
@@ -16,11 +16,11 @@ class ChassisListView(ListView):
         return Chassis.objects.filter(brand__name=self.kwargs['brand'])
 
 
-class CarModelListView(ListView):
-    model = CarModel
+class EngineListView(ListView):
+    model = Engine
 
     def get_queryset(self):
-        return CarModel.objects.filter(
+        return Engine.objects.filter(
             chassis__brand__name=self.kwargs['brand']).filter(
             chassis__name=self.kwargs['chassis'])
 

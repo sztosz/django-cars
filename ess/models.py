@@ -16,7 +16,7 @@ class Chassis(models.Model):
         return self.name
 
 
-class CarModel(models.Model):
+class Engine(models.Model):
     chassis = models.ForeignKey(Chassis)
     name = models.CharField(max_length=50)
 
@@ -25,7 +25,7 @@ class CarModel(models.Model):
 
 
 class ECU(models.Model):
-    car_model = models.ForeignKey(CarModel)
+    car_model = models.ForeignKey(Engine)
     name = models.CharField(max_length=50)
 
     def __str__(self):

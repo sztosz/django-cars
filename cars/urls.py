@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from ess.views import BrandListView, ChassisListView, CarModelListView, \
+from ess.views import BrandListView, ChassisListView, EngineListView, \
     ECUListView, ModificationListView
 
 urlpatterns = [
