@@ -1,7 +1,7 @@
 <h1>Chassis</h1>
 <ul>
 {% for chassis in object_list %}
-    <li><a href="{% url 'car-model-list' chassis.brand chassis %}">{{ chassis }}</a></li>
+    <li><a href="{% url 'car-model-list' chassis.brand.name chassis.name %}">{{ chassis }}</a></li>
 {% empty %}
     <li>No Chassis yet.</li>
 {% endfor %}

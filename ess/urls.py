@@ -11,10 +11,10 @@ urlpatterns = [
     url('^(?P<brand>\w+)/(?P<chassis>\w+)/(?P<car_model>[\w\.]+)/$', ECUListView.as_view(), name='ecu-list'),
     url('^(?P<brand>\w+)/(?P<chassis>\w+)/(?P<car_model>[\w\.]+)/(?P<ecu>\w+)/$', ModificationListView.as_view(),
         name='modification-list'),
-    url('^(?P<brand>\w+)/(?P<chassis>\w+)/(?P<car_model>[\w\.]+)/(?P<ecu>\w+)/(?P<modification>\w+)$',
+    url('^modification/(?P<id>\d+)$',
         ModificationDetailView.as_view(),
         name='modification-detail'),
-    url('^(?P<brand>\w+)/(?P<chassis>\w+)/(?P<car_model>[\w\.]+)/(?P<ecu>\w+)/(?P<modification>\w+)/upload$',
+    url('^modification/(?P<id>\d+)$',
         ModificationFileUploadView.as_view(),
         name='modification-upload'),
 

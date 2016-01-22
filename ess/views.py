@@ -1,8 +1,8 @@
-from django.http import HttpResponse, FileResponse
+from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, View
 
-from .models import Brand, Chassis, Engine, ECU, Modification
 from .forms import UploadForm
+from .models import Brand, Chassis, Engine, ECU, Modification
 
 
 class BrandListView(ListView):
@@ -45,20 +45,14 @@ class ModificationListView(ListView):
             ecu__car_model__chassis__name=self.kwargs['chassis']).filter(
             ecu__car_model__name=self.kwargs['car_model']).filter(
             ecu__name=self.kwargs['ecu']
-        )
+        ).distinct()
 
 
 class ModificationDetailView(DetailView):
     model = Modification
 
     def get_object(self, queryset=None):
-        return Modification.objects.filter(
-            ecu__car_model__chassis__brand__name=self.kwargs['brand']).filter(
-            ecu__car_model__chassis__name=self.kwargs['chassis']).filter(
-            ecu__car_model__name=self.kwargs['car_model']).filter(
-            ecu__name=self.kwargs['ecu']).filter(
-            name=self.kwargs['modification']).get(
-        )
+        return Modification.objects.get(id=self.kwargs['id'])
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -72,13 +66,7 @@ class ModificationFileUploadView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
-            script = Modification.objects.filter(
-                ecu__car_model__chassis__brand__name=self.kwargs['brand']).filter(
-                ecu__car_model__chassis__name=self.kwargs['chassis']).filter(
-                ecu__car_model__name=self.kwargs['car_model']).filter(
-                ecu__name=self.kwargs['ecu']).filter(
-                name=self.kwargs['modification']).get(
-            ).script
+            script = Modification.objects.filter(id=self.kwargs['id']).script
             temp_env = {}
             exec(script, temp_env)
             content = request.FILES['file'].file.read()
