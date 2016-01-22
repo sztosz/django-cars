@@ -14,7 +14,7 @@ urlpatterns = [
     url('^modification/(?P<id>\d+)$',
         ModificationDetailView.as_view(),
         name='modification-detail'),
-    url('^modification/(?P<id>\d+)$',
+    url('^modification/change/(?P<id>\d+)$',
         ModificationFileUploadView.as_view(),
         name='modification-upload'),
 

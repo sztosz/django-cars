@@ -66,7 +66,7 @@ class ModificationFileUploadView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
-            script = Modification.objects.filter(id=self.kwargs['id']).script
+            script = Modification.objects.get(id=self.kwargs['id']).script
             temp_env = {}
             exec(script, temp_env)
             content = request.FILES['file'].file.read()
