@@ -13,7 +13,7 @@ class Chassis(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.name
+        return "{}/{}".format(self.brand.name, self.name)
 
 
 class Engine(models.Model):
@@ -21,7 +21,7 @@ class Engine(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.name
+        return "{}/{}/{}".format(self.chassis.brand.name, self.chassis.name, self.name)
 
 
 class ECU(models.Model):
@@ -29,11 +29,12 @@ class ECU(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.name
+        return "{}/{}/{}/{}".format(self.car_model.chassis.brand.name, self.car_model.chassis.name, self.car_model.name,
+                                    self.name)
 
 
 class Modification(models.Model):
-    ecu = models.ForeignKey(ECU)
+    ecu = models.ManyToManyField(ECU)
     name = models.CharField(max_length=50)
     script = models.TextField()
 
